@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile Edit</title>
+    <link rel="stylesheet" href="edit-profile.css" />
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-title">
+        <div class="header-group"></div>
+        <h1 onclick="goToPostPage()">아무 말 대잔치</h1>
+        <div class="header-group">
+          <div class="profile-circle" onclick="toggleDropdown()">
+            <div id="myDropdown" class="dropdown-content">
+              <a href="/profile">회원정보 수정</a>
+            <a href="/password">비밀번호 수정</a>
+            <a href="/login">로그아웃</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="top-line" />
+    <div class="user-profile-edit">
+      <h1>회원정보수정</h1>
+      <div class="profile-pic-text"><span>프로필 사진</span><span>*</span></div>
+      <div class="avatar" id="avatar">
+        <div id="preview">
+          <img
+            src="images/icon.png"
+            id="avatar-image"
+            class="avatar_img"
+          />
+        </div>
+        <div class="avatar_upload">
+          <label class="upload_label"
+            ><div class="label-text">변경</div>
+            <input type="file" id="upload" />
+          </label>
+        </div>
+      </div>
+      <div class="user-details-edit">
+        <label>이메일</label>
+        <div class="user-email">startupcode@gmail.com</div>
+        <label>닉네임</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="스타트업코드"
+          required
+        />
+        <div class="helper-container">
+          <p id="name-helper" class="helper-text">*닉네임을 입력해주세요.</p>
+        </div>
+      </div>
+      <button id="edit_submit" class="edit-button">수정하기</button>
+      <button id="account-delete-button">회원 탈퇴</button>
+      <div class="withdraw_modal hidden">
+        <div class="modal_overlay"></div>
+        <div class="modal_content">
+          <h3>회원탈퇴 하시겠습니까?</h3>
+          <p>작성된 게시글과 댓글은 삭제됩니다.</p>
+          <div class="modal-buttons">
+            <button id="withdraw-modal-cancel">취소</button>
+            <button id="withdraw-modal-submit">확인</button>
+          </div>
+        </div>
+      </div>
+      <div class="submit-message">수정완료</div>
+    </div>
+    <script src="edit-profile.js"></script>
+  </body>
+</html>
