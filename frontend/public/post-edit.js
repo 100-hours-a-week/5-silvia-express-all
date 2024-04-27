@@ -46,7 +46,7 @@ async function fetchData() {
         type="text"
         class="title-content-input"
         value="${post.postTitle}"
-        placeholder=""제목을 입력해주세요. (최대 26글자)"
+        placeholder="제목을 입력해주세요. (최대 26글자)"
         oninput="checkTitleLength(this)"
       />
     </div>

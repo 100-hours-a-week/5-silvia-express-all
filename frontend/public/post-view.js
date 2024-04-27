@@ -12,6 +12,7 @@ let currentCommentText = "";
 let editedCommentText = "";
 
 
+
 async function fetchData() {
   try {
     const response = await fetch("http://localhost:3001/api/posts");
@@ -191,49 +192,15 @@ async function fetchData() {
             var submitButton = document.querySelector("#comment_submit");
             inputField.placeholder = "댓글을 남겨주세요!";
             submitButton.textContent = "댓글 등록";
-            alert("댓글 수정 완료!");
+            if ( submitButton.textContent === "댓글 수정") {
+              alert("댓글 수정 완료!");
+              submitButton.textContent = "댓글 등록";
+            }
+            
           };
         });
       });
 
-      ///////////////////////
-      // 여기부터 댓글  수정
-
-      // document
-      //   .getElementById('comment-edit-button')
-      //   .addEventListener('click', function () {
-      //     var inputField = document.querySelector('.comment-input-field');
-      //     var commentText = '';
-      //     var comments = document.querySelectorAll('.comment-content p');
-
-      //     comments.forEach(function (comment) {
-      //       if (
-      //         comment.parentElement.querySelector('#comment-edit-button') ===
-      //         this
-      //       ) {
-      //         commentText = comment.textContent.trim();
-      //       }
-      //     }, this);
-
-      //     inputField.value = commentText;
-      //     var submitButton = document.querySelector(
-      //       '.comment-submit-button button'
-      //     );
-      //     var textarea = document.getElementById('comment_input');
-
-      //     submitButton.textContent = '댓글 수정';
-      //     submitButton.style.backgroundColor = '#ACA0EB';
-
-      // submitButton.onclick = function () {
-      //   console.log(commentText);
-      //   inputField.value = '';
-      //   inputField.placeholder = '댓글을 남겨주세요!';
-      //   submitButton.textContent = '댓글 등록';
-      //   alert('댓글 수정 완료!');
-      // };
-
-      //   });
-      //////////////////
 
       //댓글모달
       // 댓글 삭제 버튼을 선택합니다.
@@ -273,7 +240,7 @@ async function fetchData() {
         const commentId = button.classList[0].replace("comment-delete-button-");
         button.addEventListener("click", () => {
           // console.log(commentId);
-          alert(`클릭했습니다. commentId: ${commentId}`);
+          // alert(`클릭했습니다. commentId: ${commentId}`);
           openCommentModal();
         });
       });
@@ -329,16 +296,24 @@ commentInput.addEventListener("input", function () {
 document
   .getElementById("comment_submit")
   .addEventListener("click", function () {
+    var inputField = document.querySelector(".comment-input-field");
     var submitButton = document.querySelector(".comment-submit-button button");
-    if (submitButton.textContent === "댓글 등록") {
-      alert("댓글 작성 완료!");
-      const commentText = "새로운 댓글 텍스트";
-      commentPost('2', commentText);
+    
+    // textarea 값이 비어 있는지 확인
+    if (inputField.value.trim() === "") {
+      alert("댓글을 입력해주세요.");
+    } else {
+      // 댓글 등록 로직 실행
+      if (submitButton.textContent === "댓글 등록") {
+        alert("댓글 작성 완료!");
+      }
+      // textarea를 비웁니다.
+      inputField.value = "";
+      // 버튼의 배경색을 설정합니다.
+      submitButton.style.backgroundColor = "#ACA0EB";
     }
-    document.querySelector(".comment-input-field").value = "";
-    var submitButton = document.querySelector(".comment-submit-button button");
-    submitButton.style.backgroundColor = "#ACA0EB";
   });
+
   //////////////////
 
 //드롭박스
@@ -365,30 +340,6 @@ window.onclick = function (event) {
 }
 
 
-// 댓글 작성 함수
-
-const commentPost = async (postId, commentText) => {
-  try {
-    const addCommentResponse = await fetch(
-      `http://localhost:3001/api/posts/${postId}/comments`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ commentText }) // Modify to use the provided commentText
-      }
-    );
-    if (addCommentResponse.ok) {
-      alert("댓글이 성공적으로 추가되었습니다.");
-    } else {
-      alert("댓글 추가에 실패했습니다.");
-    }
-  } catch (error) {
-    console.error("댓글 추가 중 오류 발생:", error);
-    alert("댓글 추가 중 오류가 발생했습니다.");
-  }
-}
 
 // const commentPost = async () => {
 //   try {
