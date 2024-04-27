@@ -9,9 +9,6 @@ const post = require('./routes/posts');
 
 app.use(cors());
 
-
-// app.use(express.static(publicPath));
-
 app.use(authentication);
 
 app.use(post);

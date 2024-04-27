@@ -1,15 +1,28 @@
 const express = require('express');
-const { Router } = require('express');
 const path = require('path');
-
-const app = Router();
 const publicPath = path.join(__dirname, '../public');
+const app = express(); // express()로 애플리케이션을 만듭니다.
 
-app.use(express.static(publicPath)); // 이 코드가 있어야 정적 파일 제공할때 어쩌고.. 암튼 이거 이썽야 css불러옴 왜지 왜지
+app.use(express.static(publicPath));
+
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(publicPath, 'post-main.html'));
 });
+
+// 게시글 수정 페이지 라우터 추가
+app.get('/edit/:postId', (req, res) => {
+  const postId = req.params.postId;
+  // const postId = req.params.postId;
+  // 게시글 수정 페이지를 보여주는 로직을 여기에 추가
+  res.sendFile(path.join(publicPath, `post-edit.html`));
+});
+
+app.get('/new', (req, res) => {
+  res.sendFile(path.join(publicPath, 'new-post.html'));
+});
+
+
 
 app.get('/:postId', (req, res) => {
   const postId = req.params.postId;
@@ -17,14 +30,4 @@ app.get('/:postId', (req, res) => {
 });
 
 
-app.get('/new', (req, res) => {
-  res.sendFile(path.join(publicPath, 'new-post.html'));
-});
-
 module.exports = app;
-
-
-
-
-
-

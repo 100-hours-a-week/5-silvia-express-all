@@ -26,7 +26,6 @@ window.onclick = function (event) {
 
 // ------------------------ 여기부터 fetch  -----------------------
 
-
 fetch('http://localhost:3001/api/posts')
   .then(response => response.json())
   .then(posts => {

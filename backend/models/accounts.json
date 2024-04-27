@@ -1,14 +1,14 @@
 {
     "users": [
       {
-        "name": "gaa",
-        "email": "1234@gmail.com",
+        "name": "user1",
+        "email": "user1@gmail.com",
         "password": "Aaaa1234!!"
       },
       {
-        "name": "sdfsdfa",
-        "email": "5678@gmail.com",
-        "password": "5678!Abcde"
+        "name": "user2",
+        "email": "user2@gmail.com",
+        "password": "Aaaa1234!!"
       }
     ]
   }

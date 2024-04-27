@@ -1,8 +1,5 @@
 var currentUrl = window.location.href;
-
-// URL에서 마지막 '/'를 찾아서 그 뒤의 부분을 postId로 설정합니다.
 var postId = currentUrl.substring(currentUrl.lastIndexOf('/') + 1);
-
 console.log(postId);
 
 
@@ -10,8 +7,10 @@ function goToPostPage() {
   window.location.href = "/post";
 }
 
-
+let inputField = document.querySelector(".comment-input-field");
 let currentCommentText = "";
+let editedCommentText = "";
+
 
 async function fetchData() {
   try {
@@ -42,7 +41,7 @@ async function fetchData() {
                 <div class="author">${post.author}</div>
                 <p>${post.date}</p>
                 <div class="buttons">
-                    <button id="edit-button" onclick="window.location.href = 'post-edit.html'">수정</button>
+                    <button id="edit-button" onclick="window.location.href = '/post/edit/${postId}'">수정</button>
                     <button id="account-delete-button">삭제</button>
                     <div class="withdraw_modal hidden">
             <div class="modal_overlay"></div>
@@ -169,7 +168,7 @@ async function fetchData() {
             "comment-edit-button-",
             ""
           );
-          const inputField = document.querySelector(".comment-input-field");
+          
           const submitButton = document.querySelector(
             ".comment-submit-button button"
           );
@@ -179,18 +178,17 @@ async function fetchData() {
             );
 
           currentCommentText = commentContent.textContent.trim();
+          
 
           inputField.value = currentCommentText;
           submitButton.textContent = "댓글 수정";
           submitButton.style.backgroundColor = "#ACA0EB";
 
           
-          
 
           submitButton.onclick = () => {
-            var submitButton = document.querySelector(".comment-submit-button button");
 
-            printUserInput();
+            var submitButton = document.querySelector("#comment_submit");
             inputField.placeholder = "댓글을 남겨주세요!";
             submitButton.textContent = "댓글 등록";
             alert("댓글 수정 완료!");
@@ -274,7 +272,7 @@ async function fetchData() {
       Array.from(commentOpenButton).forEach((button) => {
         const commentId = button.classList[0].replace("comment-delete-button-");
         button.addEventListener("click", () => {
-          console.log(commentId);
+          // console.log(commentId);
           alert(`클릭했습니다. commentId: ${commentId}`);
           openCommentModal();
         });
@@ -289,7 +287,12 @@ async function fetchData() {
 
 function saveCommentText(commentText) {
   currentCommentText = commentText;
-  console.log(currentCommentText);
+  // console.log(currentCommentText);
+}
+
+function saveEditedCommentText() {
+  editedCommentText = inputField.value;
+  console.log(editedCommentText);
 }
 
 fetchData();
@@ -297,12 +300,6 @@ fetchData();
 // 뒤로가기
 function goBack() {
   window.history.back();
-}
-
-function printUserInput() {
-  var textarea = document.getElementById('comment_input');
-  var userInput = textarea.value;
-  console.log(userInput);
 }
 
 // 댓글 버튼 색깔 변경
