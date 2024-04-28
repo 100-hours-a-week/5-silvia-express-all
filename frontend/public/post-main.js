@@ -24,6 +24,27 @@ window.onclick = function (event) {
   }
 };
 
+function logout() {
+  fetch('/logout', {
+      method: 'POST', // HTTP 메소드 지정
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      credentials: 'same-origin' // 쿠키를 포함시키기 위해 필요
+  })
+  .then(response => {
+      if(response.ok) {
+          console.log('로그아웃 성공');
+          // 로그아웃 성공 후 처리, 예를 들어 로그인 페이지로 리다이렉트
+          window.location.href = '/login';
+      } else {
+          console.log('로그아웃 실패');
+      }
+  })
+  .catch(error => console.error('로그아웃 중 에러 발생:', error));
+}
+
+
 // ------------------------ 여기부터 fetch  -----------------------
 
 fetch('http://localhost:3001/api/posts')

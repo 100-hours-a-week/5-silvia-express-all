@@ -1,9 +1,13 @@
 const express = require('express');
 const path = require('path');
+const session = require('express-session');
+
 const publicPath = path.join(__dirname, '../public');
 const app = express(); // express()로 애플리케이션을 만듭니다.
 
 app.use(express.static(publicPath));
+app.use(express.json()); // JSON 본문을 파싱하기 위한 미들웨어 추가
+app.use(express.urlencoded({ extended: true })); // URL 인코딩된 데이터를 파싱하기 위한 미들웨어 추가
 
 
 app.get('/', (req, res) => {

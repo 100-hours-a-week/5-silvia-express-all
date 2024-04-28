@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const loginForm = document.getElementById('login-form');
 
   loginForm.addEventListener('submit', function (event) {
-    event.preventDefault(); // Prevent form submission
+    event.preventDefault(); // 폼 제출 방지
 
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value.trim();
@@ -21,14 +21,34 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (user) {
           alert('로그인 성공!');
+          // 여기서 login 함수 호출
+          login(email, password); 
           
-          window.location.href = '/post';
+          window.location.href = '/post'; // 페이지 리다이렉션
         } else {
           alert('입력하신 계정 정보가 정확하지 않습니다.');
         }
       });
   });
 });
+
+function login(a, b) {
+  fetch('http://localhost:3001/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      email: a,
+      password: b
+    }),
+  })
+  .then(response => response.text())
+  .then(data => console.log(data))
+  .catch((error) => console.error('Error:', error));
+}
+
+
 
 // 이메일 helper text
 document.getElementById('email').addEventListener('input', function () {
@@ -41,10 +61,10 @@ document.getElementById('email').addEventListener('input', function () {
     helperText.style.display = 'block';
     helperText.textContent =
       '*올바른 이메일 주소 형식을 입력해주세요. (예: example@example.com)';
-    emptyBox.style.display = 'block';
+    // emptyBox.style.display = 'block';
   } else {
     helperText.style.display = 'none';
-    emptyBox.style.display = 'none';
+    // emptyBox.style.display = 'none';
   }
 });
 

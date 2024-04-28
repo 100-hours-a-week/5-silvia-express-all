@@ -7,6 +7,11 @@ function goToPostPage() {
   window.location.href = "/post";
 }
 
+//////
+
+
+////////
+
 let inputField = document.querySelector(".comment-input-field");
 let currentCommentText = "";
 let editedCommentText = "";
@@ -153,6 +158,43 @@ async function fetchData() {
           alert("게시글 삭제 중 오류가 발생했습니다.");
         }
       };
+
+      // 게시글 삭제 함수
+// const submitModal = async () => {
+//   try {
+//     const deleteResponse = await fetch(
+//       `http://localhost:3001/api/posts/${postId}`,
+//       {
+//         method: "DELETE",
+//         credentials: "include" // 세션 쿠키를 포함하여 요청
+//       }
+//     );
+//     if (deleteResponse.ok) {
+//       // 게시글 삭제 성공 시 서버로부터 세션 정보 가져오기
+//       const sessionResponse = await fetch("http://localhost:3001/login/session", {
+//         credentials: "include" // 세션 쿠키를 포함하여 요청
+//       });
+//       const sessionData = await sessionResponse.json();
+
+//       // 로그인된 사용자의 닉네임과 게시글의 저자를 비교하여 일치하는 경우에만 삭제 완료 메시지 출력
+//       if (
+//         sessionData.is_logined &&
+//         sessionData.nickname === post.author // 게시글의 저자와 로그인된 사용자의 닉네임 비교
+//       ) {
+//         alert("게시글이 삭제되었습니다.");
+//         window.location.href = "/post";
+//       } else {
+//         alert("게시글 삭제에 실패했습니다.");
+//       }
+//     } else {
+//       alert("게시글 삭제에 실패했습니다.");
+//     }
+//   } catch (error) {
+//     console.error("게시글 삭제 중 오류 발생:", error);
+//     alert("게시글 삭제 중 오류가 발생했습니다.");
+//   }
+// };
+
 
       openButton.addEventListener("click", openModal);
       closeBtn.addEventListener("click", closeModal);
