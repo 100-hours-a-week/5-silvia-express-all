@@ -5,6 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
 
 const authController = express.Router();
 const postsFilePath = path.join(__dirname, '../models/accounts.json');
@@ -14,6 +15,8 @@ authController.use(express.json());
 authController.use(express.urlencoded({ extended: true }));
 authController.use(bodyParser.json());
 authController.use(cookieParser());
+
+authController.use(helmet());
 
 // CORS 설정
 authController.use(cors({
